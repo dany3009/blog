@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{% block title %}{% endblock %}</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+	
+<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+	
+<body>
+	<div id="wraper">	
+		<span id="login">
+			{% if request.user.is_authenticated %}
+				Wellcome, {{ request.user.username }}!
+				<a href="/logout/"> [Logout]</a>
+			{% else %}
+				<a href="/login/">[Login]</a>
+			{% endif %}
+			
+			<a href="{% url blog.views.register %}"> [Register]</a>
+		</span>
+	<div id="menu">
+		<ul>
+			<li><a href="{% url blog.views.home %}">Home</a></li>
+			<li><a href="{% url blog.views.about %}">About</a></li>
+			<li><a href="{% url blog.views.contacts %}">Contacts</a></li>
+			{% if request.user.is_authenticated %}
+			<li><a href="{% url blog.views.add_post %}">Add Post</a></li>
+			{% endif %}
+		</ul>
+	</div>
+	
+	<div id="content">
+	{% block content %}
+	{% endblock %}	
+	</div>
+
+	</div>
+	
+	<div id="footer">
+		<p align="center">Copyright © 2013 | All Rights Reserved | 
+			Designed by <a href="http://bliznuk.16mb.com/" target="_blank">Bliznuk Philipp</a></p>
+	</div>
+	
+</body>
+</html>

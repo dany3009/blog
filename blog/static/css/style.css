@@ -1,0 +1,27 @@
+html, body {height: 99%; background: #CFCFCF; margin: 0; padding: 0;}
+#wraper {height: 100%; width: 1000px; margin: 0 auto;}
+
+#login {float: right; margin-top: -20px;}
+
+#menu {text-align: center; opacity: 0.8; margin-top: 20px;}
+#menu ul {list-style: none; background: #ADADAD; margin: 0; padding: 0;}
+#menu ul li {display: inline; padding: 0 10px;}
+
+#footer {position: relative; margin-top: -45px;}
+
+a {text-decoration: none; color: #F00;}
+a:hover {text-decoration: underline;}
+
+.error {text-align: center; color: #F00;}
+
+#loginform form table {margin: 20px auto;}
+#registerform form table {margin: 20px auto; text-align: left;}
+#postform form table {margin: 20px auto;}
+.errorlist {color: #FF0000; list-style: none outside none; margin: 0; padding: 0;}
+
+.info {font-size: 11px; color: #8B8D8F;}
+.readmore {float: right;}
+
+.comment form {margin: 0 auto;}
+.comments {margin: 20px;}
+.name {float: left; margin: 0 5px; color: #283DD9;}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load comments %}
+{% get_comment_count for post as comment_count %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+
+<h1 align="center">{{ post.title }}</h1>
+<p align="justify">{{ post.body }}</p><hr>
+<span class="info">Posted by <b>{{ post.author }}</b> at {{ post.date|date:'Y-m-d H:i' }}.</span>
+
+<div class="comments">
+	{% get_comment_list for post as comment_list %}
+		{% for comment in comment_list %}
+			<p class="name">{{ comment.user_name }}: </p>
+			<p class="comment_body">{{ comment.comment }}</p>
+		{% endfor %}
+</div>
+
+<div class="comment">
+{% if user.is_authenticated %}
+
+{% get_comment_form for post as form %}
+    <form action="{% comment_form_target %}" method="post">
+    	{% csrf_token %}
+    	{{ form.content_type }}
+    	{{ form.object_pk }}
+    	{{ form.timestamp }}
+    	{{ form.security_hash }}
+    	<p align="center"><textarea id="id_comment" rows="10" cols="100" name="comment"></textarea><br />
+    	<input type="hidden" name="next" value="{% url blog.views.view_post post.id %}" />
+    	<input type="hidden" name="name" id="id_name" value="{{ request.user.username }}" />
+    	<input type="submit" value="Add comment" id="id_submit" /></p>
+    </form>
+    
+{% else %}
+    <p align="center">Please <a href="{% url login %}">login</a> to leave a comment.</p>
+{% endif %}    
+
+</div>
+
+{% endblock %}

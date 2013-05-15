@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p class="error">Invalid login or password.</p>
+  {% endif %}
+  
+<div id="loginform">	
+  <form action='.' method='post'>{% csrf_token %}
+  	<table>
+  		<tr>
+	    	<td><label for="username">Login: </label></td>
+	    	<td><input type="text" name="username" value="" id="username"></td>
+	    </tr>
+	    
+	    <tr>
+		    <td><label for="password">Password: </label></td>
+		    <td><input type="password" name="password" value="" id="password"></td>
+		</tr>
+		
+		<tr>
+		    <td colspan="2" style="text-align: center;"><input type="submit" value="login" />
+		    <input type="hidden" name="next" value="{{ '../' }}" /></td>
+	    </tr>
+	    
+    </table>
+  </form>
+</div>
+{% endblock %}

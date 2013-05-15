@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Register User{% endblock %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p class="error">Please correct the mistakes.</p>
+  {% endif %}
+  
+<div id="registerform">	
+<form action='.' method='post'>{% csrf_token %}  
+	<table>  
+		<tr>
+	    	<td><label for="id_username">Login: </label></td>
+	    	<td>{{ form.username }}</td>
+	    	<td>{{ form.username.errors }}</td>
+	    </tr>
+	    
+		<tr>
+	    	<td><label for="id_password1">Password: </label></td>
+	    	<td>{{ form.password1 }}</td>
+	    	<td>{{ form.password1.errors }}</td>
+	    </tr>
+
+		<tr>
+	    	<td><label for="id_password2">Password confirmation: </label></td>
+	    	<td>{{ form.password2 }}</td>
+	    	<td>{{ form.password2.errors }}</td>
+	    </tr>
+	    
+		<tr>
+	    	<td><label for="id_email">E-mail: </label></td>
+	    	<td>{{ form.email }}</td>
+	    	<td>{{ form.email.errors }}</td>
+	    </tr>
+
+		<tr>
+	    	<td colspan="3" style="text-align: center;"><input type="submit" value="Register" /></td>
+		</tr>	
+	</table>
+</form>
+
+</div>
+
+{% endblock %}
