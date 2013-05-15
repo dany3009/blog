@@ -1,5 +1,4 @@
 from django.views.generic.simple import direct_to_template
-from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
@@ -16,7 +15,6 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-@login_required
 def contacts(request):
     subject = 'Mail from blog'
     message = request.POST.get('message', '')
