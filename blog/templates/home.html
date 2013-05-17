@@ -8,9 +8,9 @@
 	{% for post in posts %}
 		{% get_comment_count for post as comment_count %}
 		<h4 align="center"><a href="{% url blog.views.view_post post.id %}">{{ post.title }}</a></h4>
-		<p align="justify">{{ post.body|truncatewords:50 }}</p>
-		<span class="info">Posted by <b>{{ post.author }}</b> at {{ post.date|date:'Y-m-d H:i' }}. 
-		Comments: {{ comment_count }}</span>
+		<p align="justify">{{ post.body|truncatewords:50|safe }}</p>
+		<small class="info">Posted by <b>{{ post.author }}</b> at {{ post.date|date:'Y-m-d H:i' }}. 
+		Comments: {{ comment_count }}</small>
 		<a class="readmore" href="{% url blog.views.view_post post.id %}">Read more →</a>
 		<hr>
 	{% endfor %}

@@ -1,46 +1,65 @@
-{% extends "base.html" %}
-
+{% extends "base_form.html" %}
 {% block title %}Register User{% endblock %}
-
 {% block content %}
 
   {% if form.errors %}
-    <p class="error">Please correct the mistakes.</p>
+    <h3 class="text-error" style="text-align: center;">Please correct the mistakes.</h3>
   {% endif %}
   
-<div id="registerform">	
+<!-- <div id="registerform">	
 <form action='.' method='post'>{% csrf_token %}  
 	<table>  
 		<tr>
 	    	<td><label for="id_username">Login: </label></td>
 	    	<td>{{ form.username }}</td>
-	    	<td>{{ form.username.errors }}</td>
+	    	<td class="error">{{ form.username.errors }}</td>
 	    </tr>
 	    
 		<tr>
 	    	<td><label for="id_password1">Password: </label></td>
 	    	<td>{{ form.password1 }}</td>
-	    	<td>{{ form.password1.errors }}</td>
+	    	<td class="error">{{ form.password1.errors }}</td>
 	    </tr>
 
 		<tr>
 	    	<td><label for="id_password2">Password confirmation: </label></td>
 	    	<td>{{ form.password2 }}</td>
-	    	<td>{{ form.password2.errors }}</td>
+	    	<td class="error">{{ form.password2.errors }}</td>
 	    </tr>
 	    
 		<tr>
 	    	<td><label for="id_email">E-mail: </label></td>
 	    	<td>{{ form.email }}</td>
-	    	<td>{{ form.email.errors }}</td>
+	    	<td class="error">{{ form.email.errors }}</td>
 	    </tr>
 
 		<tr>
-	    	<td colspan="3" style="text-align: center;"><input type="submit" value="Register" /></td>
+	    	<td colspan="3" style="text-align: center;"><input type="submit" class="btn" value="Register" /></td>
 		</tr>	
 	</table>
 </form>
 
-</div>
+</div> -->
+
+<div class="container">
+
+	<form class="form-signin" action='.' method='post'>{% csrf_token %}
+    	<h2 class="form-signin-heading">Register new user</h2>
+        <input type="text" class="input-block-level" name="username" placeholder="Login" id="id_username">
+        <small class="text-error">{{ form.username.errors }}</small>
+        
+        <input type="password" class="input-block-level" name="password1" placeholder="Password" id="id_password1" />
+        <small class="text-error">{{ form.password1.errors }}</small>
+        
+        <input type="password" class="input-block-level" name="password2" placeholder="Password (again)" id="id_password2">
+        <small class="text-error">{{ form.password2.errors }}</small>
+        
+        <input type="text"class="input-block-level" name="email" placeholder="Email" id="id_email" />
+        <small class="text-error">{{ form.email.errors }}</small>
+        
+        <p style="text-align: center;"><button class="btn btn-large btn-primary" type="submit">Register</button></p>
+    </form>
+
+</div> 
 
 {% endblock %}

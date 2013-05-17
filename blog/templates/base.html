@@ -9,28 +9,38 @@
 <meta name="description" content="" />
 	
 <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script>
+        tinymce.init({selector:'textarea'});
+</script>
+
+<style>hr {margin: 0;}</style>
 
 </head>
 	
 <body>
-	<div id="wraper">	
-		<span id="login">
+	<div id="wraper" class="container">	
+		<div id="login">
 			{% if request.user.is_authenticated %}
 				Wellcome, {{ request.user.username }}!
-				<a href="/logout/"> [Logout]</a>
+				<a href="{% url logout %}"> [Logout]</a>
 			{% else %}
-				<a href="/login/">[Login]</a>
+				<a href="{% url login %}">[Login]</a>
 			{% endif %}
 			
 			<a href="{% url blog.views.register %}"> [Register]</a>
-		</span>
-	<div id="menu">
-		<ul>
-			<li><a href="{% url blog.views.home %}">Home</a></li>
-			<li><a href="{% url blog.views.about %}">About</a></li>
-			<li><a href="{% url blog.views.contacts %}">Contacts</a></li>
+		</div>
+	<div>
+		<ul class="nav nav-tabs">		
+			<li {% if page == 'home' %}class="active"{% endif %}><a href="{% url blog.views.home %}"><i class="icon-home"></i> Home</a></li>			
+			<li {% if page == 'about' %}class="active"{% endif %}><a href="{% url blog.views.about %}"><i class="icon-book"></i> About</a></li>
+			<li {% if page == 'contacts' %}class="active"{% endif %}><a href="{% url blog.views.contacts %}"><i class="icon-briefcase"></i> Contacts</a></li>
 			{% if request.user.is_authenticated %}
-			<li><a href="{% url blog.views.add_post %}">Add Post</a></li>
+			<li {% if page == 'add' %}class="active"{% endif %}><a href="{% url blog.views.add_post %}"><i class="icon-pencil"></i> Add Post</a></li>
 			{% endif %}
 		</ul>
 	</div>

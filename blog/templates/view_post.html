@@ -7,14 +7,14 @@
 {% block content %}
 
 <h1 align="center">{{ post.title }}</h1>
-<p align="justify">{{ post.body }}</p><hr>
+<p align="justify">{{ post.body|safe }}</p><hr>
 <span class="info">Posted by <b>{{ post.author }}</b> at {{ post.date|date:'Y-m-d H:i' }}.</span>
 
 <div class="comments">
 	{% get_comment_list for post as comment_list %}
 		{% for comment in comment_list %}
 			<p class="name">{{ comment.user_name }}: </p>
-			<p class="comment_body">{{ comment.comment }}</p>
+			<p class="comment_body">{{ comment.comment|safe }}</p>
 		{% endfor %}
 </div>
 
@@ -31,7 +31,7 @@
     	<p align="center"><textarea id="id_comment" rows="10" cols="100" name="comment"></textarea><br />
     	<input type="hidden" name="next" value="{% url blog.views.view_post post.id %}" />
     	<input type="hidden" name="name" id="id_name" value="{{ request.user.username }}" />
-    	<input type="submit" value="Add comment" id="id_submit" /></p>
+    	<input type="submit" class="btn btn-large btn-primary" value="Add comment" id="id_submit" /></p>
     </form>
     
 {% else %}

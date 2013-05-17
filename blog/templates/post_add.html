@@ -8,9 +8,9 @@
     <p class="error">Please correct the mistakes.</p>
   {% endif %}
 
-<div id="postform">
+<div id="postform" class="container">
 <form action='.' method='post'>{% csrf_token %}  
-	<table>  
+	<!-- <table>  
 		<tr>
 	    	<td><label for="id_title">Post Title: </label></td>
 	    	<td>{{ form.title }}</td>
@@ -18,7 +18,7 @@
 	    
 		<tr>
 	    	<td><label for="id_body">Post Body: </label></td>
-	    	<td>{{ form.body }}</td>
+	    	<td><td><textarea rows="10" cols="100" name="body" id="id_body"></textarea></td>
 	    </tr>
 
 		<tr>
@@ -32,7 +32,18 @@
 		<tr>
 	    	<td colspan="2" style="text-align: center;"><input type="submit" value="Send" /></td>
 		</tr>	
-	</table>
+	</table> -->
+	
+	
+	<form class="form-signin" action='.' method='post'>{% csrf_token %}
+        <input type="text" class="input-block-level" name="title" placeholder="Post Title" value="" id="id_title">
+        <textarea rows="10" cols="100" name="body" id="id_body"></textarea>
+        <input id="id_date" type="hidden" name="date" value="{{ date }}" />
+        <input id="id_author" type="hidden" name="author" value="{{ author }}" />
+		<br />
+        <p style="text-align: center;"><button class="btn btn-large btn-success" type="submit">Add post</button></p>
+    </form>
+	
 </div>  
 
 {% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{% block title %}{% endblock %}</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+	
+<link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}css/signin.css" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+
+
+</head>
+	
+<body>
+
+	{% block content %}
+	{% endblock %}		
+
+</body>
+</html>

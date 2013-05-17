@@ -10,7 +10,9 @@ urlpatterns = patterns('',
     
     url(r'^add_post/$', 'blog.views.add_post', name='add post'),
     url(r'^post/(?P<post_id>\d+)', 'blog.views.view_post', name='post view'),
+    
     url(r'^comments/', include('django.contrib.comments.urls'), name='comments'),
+    url(r'^tinymce/', include('tinymce.urls')),
     
     url( r'^login/$', 'django.contrib.auth.views.login', { "template_name": "login.html" }, name='login'),
     url( r'^logout/$', 'django.contrib.auth.views.logout', { "template_name": "logout.html" }, name='logout'),

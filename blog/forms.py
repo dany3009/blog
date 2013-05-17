@@ -1,15 +1,15 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 from blog.models import *
 from django import forms
 import datetime
 
 class MyUserCreationForm(UserCreationForm):
-
     username = forms.RegexField(label=("Username"), max_length = 30, regex = r'^[\w.@+-]+$', help_text = (""), error_messages = {'invalid': ("This value may contain only letters, numbers and @/./+/-/_ characters.")})
     password1 = forms.CharField(label=("Password"), widget = forms.PasswordInput)
-    password2 = forms.CharField(label=("Password confirmation"), widget = forms.PasswordInput, help_text = (""))
-    email = forms.EmailField(label=("Email address"))
+    password2 = forms.CharField(label=("Password (again)"), widget = forms.PasswordInput, help_text = (""))
+    email = forms.RegexField(label=("Email address"), regex = r'^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$', error_messages = {'invalid': ("Please type correct mail adress.")})
 
     class Meta:
         model = User
@@ -46,17 +46,10 @@ class MyUserCreationForm(UserCreationForm):
         return user
     
 class BlogPostForm(forms.ModelForm):
+    body = HTMLField()
     class Meta():
         model = BlogPost
-    
-    def save(self, commit = True):
-        post = super(BlogPostForm, self).save(commit = False)
-        post.title = self.cleaned_data['title']
-        post.body = self.cleaned_data['body']
-        if commit:
-            post.save()
-        return post
-    
+
 class ContactForm(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()

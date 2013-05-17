@@ -10,15 +10,17 @@ import datetime
 
 def home(request):
     posts = BlogPost.objects.all()
-    return direct_to_template(request, 'home.html', { 'posts' : posts })
+    current_page = 'home'
+    return direct_to_template(request, 'home.html', { 'posts' : posts, 'page' : current_page })
 
 def about(request):
-    return render(request, 'about.html')
+    current_page = 'about'
+    return render(request, 'about.html', { 'page' : current_page })
 
 def contacts(request):
+    current_page = 'contacts'
     subject = 'Mail from blog'
     message = request.POST.get('message', '')
-    from_email = request.user.email
     if message:
         try:
             send_mail(subject, message, from_email, ['dany3009@rambler.ru'])
@@ -26,8 +28,8 @@ def contacts(request):
             return HttpResponse('Invalid header found.')
         return HttpResponseRedirect('/')
     else:
-        return render_to_response('contacts.html', {'form': ContactForm()}, RequestContext(request))
-    return render_to_response('contacts.html', {'form': ContactForm()}, RequestContext(request))
+        return render_to_response('contacts.html', {'form': ContactForm(), 'page' : current_page }, RequestContext(request))
+    return render_to_response('contacts.html', {'form': ContactForm(), 'page' : current_page }, RequestContext(request))
 
 def register(request):
     if request.method == 'POST':
@@ -42,6 +44,7 @@ def register(request):
     return render_to_response("register.html", { 'form' : form }, RequestContext(request))
 
 def add_post(request):
+    current_page = 'add'
     date = datetime.datetime.now()
     author = request.user.username
     if request.method == 'POST':
@@ -51,7 +54,7 @@ def add_post(request):
             return HttpResponseRedirect('/')
     else:
         form = BlogPostForm()
-    return render_to_response("post_add.html", { 'form' : form, 'date' : date, 'author' : author }, RequestContext(request))
+    return render_to_response("post_add.html", { 'form' : form, 'date' : date, 'author' : author, 'page' : current_page }, RequestContext(request))
 
 def view_post(request, post_id):
     post = BlogPost.objects.get(pk = post_id)
