@@ -11,10 +11,12 @@
 <span class="info">Posted by <b>{{ post.author }}</b> at {{ post.date|date:'Y-m-d H:i' }}.</span>
 
 <div class="comments">
+<style>.comment_body p {margin: 0;}</style>
 	{% get_comment_list for post as comment_list %}
 		{% for comment in comment_list %}
-			<p class="name">{{ comment.user_name }}: </p>
-			<p class="comment_body">{{ comment.comment|safe }}</p>
+			<p class="name">{{ comment.user_name }}: </p><br />
+			<div class="comment_body">{{ comment.comment|safe }}</div>
+			<hr>
 		{% endfor %}
 </div>
 

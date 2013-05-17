@@ -1,7 +1,10 @@
 {% extends "base.html" %}
-
 {% block title %}Logout successful{% endblock %}
-
 {% block content %}
 <h1 align="center">You have been successfuly logout.</h1>
+<script language = 'javascript' type="text/javascript">
+  var delay = 500;
+  setTimeout("document.location.href='/'", delay);
+</script>
+
 {% endblock %}
